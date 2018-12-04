@@ -5,67 +5,8 @@ subtitle: Each post also has a subtitle
 tags: [MMA] 
 ---
 
-You can write regular [markdown](http://markdowntutorial.com/) here and Jekyll will automatically convert it to a nice webpage.  I strongly encourage you to [take 5 minutes to learn how to write in markdown](http://markdowntutorial.com/) - it'll teach you how to transform regular text into bold/italics/headings/tables/etc.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices arcu nisl, quis lobortis sapien molestie at. Aliquam eget diam leo. Mauris tellus libero, auctor eu mattis vel, facilisis eu dolor. Pellentesque tortor elit, elementum ut consequat ut, consectetur id orci. Proin nec tincidunt nisl. Nam consequat tortor quis aliquet commodo. Integer varius commodo dui, vel egestas ex placerat a.
 
-**Here is some bold text**
+Curabitur quis commodo dolor, volutpat porta nibh. Etiam mattis dui id ex pellentesque consequat. Integer lacinia libero eros, sed mollis lectus ultricies feugiat. Cras sit amet quam tellus. Donec varius fringilla pellentesque. Quisque dignissim sollicitudin ex eu accumsan. Nam condimentum vestibulum eros non ultrices.
 
-## Here is a secondary heading
-
-Here's a useless table:
-
-| Number | Next number | Previous number |
-| :------ |:--- | :--- |
-| Five | Six | Four |
-| Ten | Eleven | Nine |
-| Seven | Eight | Six |
-| Two | Three | One |
-
-
-How about a yummy crepe?
-
-![Crepe](http://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg)
-
-Here's a code chunk:
-
-~~~
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-~~~
-
-And here is the same code with syntax highlighting:
-
-```javascript
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-```
-
-And here is the same code yet again but with line numbers:
-
-{% highlight javascript linenos %}
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-{% endhighlight %}
-
-## Boxes
-You can add notification, warning and error boxes like this:
-
-### Notification
-
-{: .box-note}
-**Note:** This is a notification box.
-
-### Warning
-
-{: .box-warning}
-**Warning:** This is a warning box.
-
-### Error
-
-{: .box-error}
-**Error:** This is an error box.
+Donec id nibh mattis velit eleifend suscipit a ut ex. Nam volutpat massa suscipit consequat aliquam. Cras eleifend lacus vel lectus posuere egestas. Sed nec metus efficitur, tincidunt massa a, viverra metus. Aenean aliquet risus eu felis fringilla posuere. Nullam sed dapibus neque. Sed sollicitudin eu purus in gravida. Aenean fringilla, turpis vel efficitur laoreet, urna enim vehicula quam, eget aliquet lectus eros ac ligula. Ut quis arcu non nibh sollicitudin accumsan. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sollicitudin turpis tellus, et tempor nisl aliquet eget. Maecenas faucibus quam ipsum, sit amet vulputate mauris facilisis quis. Nullam id pulvinar orci. Donec varius quam eu augue ullamcorper, commodo porta ex ornare.
