@@ -2,7 +2,7 @@
 layout: post
 title: Robber Barons and Health IT
 subtitle: Information Blocking and Data Liquidity in Healthcare
-tags: [MMA] 
+tags: [healthcare] 
 ---
 
 Information blocking and data liquidity have been lingering issues within healthcare for quite a while and are gaining ever greater attention with the push toward value-based healthcare. Information blocking received press with CMS and HHS looking at future rulings that will incent IT vendors and providers to be more open with their data.
