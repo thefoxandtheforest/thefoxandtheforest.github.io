@@ -4,7 +4,7 @@ title: Charter
 subtitle: The Why and The How of The Fox & The Forest
 ---
 
-"Fox knows many things, but the Hedgehog knows one big thing".  
+_Fox knows many things, but the Hedgehog knows one big thing_ - Archilochus 
 
 Unfortunately, research by Tetlock et al. and the 'lived experience' of us all have shown that often each of our one big thing is horrifically off-base.  Instead we combine the many little things with the random forest's "many weak learners combined turn into a strong learner" as the basis of our approach.  Further, the advantage of the fox is the willingness to experiment & update.  Instead of the Hedgehog's immovable mountain made of stone, foxes tend ever-expanding networks of trees, rivers, etc to comprise its forest.
 
