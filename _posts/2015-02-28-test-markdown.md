@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bayes in the Cage Updaing Priors in Modern MMA
+title: Bayes in the Cage- Updating Priors in Modern MMA
 subtitle: Each post also has a subtitle
 tags: [MMA] 
 ---
