@@ -41,11 +41,7 @@ for i in range(1980, 2018, 5):
 
 years.append(str(2018))
 years
-```
 
-Test test test
-
-```python
 #create dictionary and then perform a for loop to create pandas dataframes in years subfolder
 d = {}
 for year in years:
@@ -60,9 +56,124 @@ for year in years:
 # remove commas from visitor statistics
 for year in years:
     combined[year] = combined[year].str.replace(',', '')
-```
 
-lorem ipsum
+# create pandas dataframe from wikipedia data with latitude and longitude
+
+wiki_df = pd.read_csv('wiki_data.csv', usecols=range(3)) # we only need first three columns
+
+
+# create list from combined.ParkName and do some modification to ensure dataframes are equivalent lengths
+np_list = list(combined['ParkName'].unique())
+
+np_list.remove('National Park of American Samoa')
+
+np_list.append('American Samoa NP')
+
+np_list.append('Indiana Dunes NP')
+
+np_list.sort()
+
+# create new column value with np_list
+wiki_df['ParkName'] = np_list
+
+# merge the two dataframes
+df = combined.merge(wiki_df, on='ParkName')
+
+# In order to make the Longitude value degree East instead of West; Plotly reads longitude as East
+df['Longitude'] = df['Longitude'] * -1
+
+# give each Park its own color/rgb value
+colors = []
+
+for i in range(len(df.ParkName)):
+    colors.append(f'rgb({np.random.randint(0,256)}, {np.random.randint(0,256)}, {np.random.randint(0,256)})')
+
+df['colors'] = colors
+
+
+#save df as csv
+
+df.to_csv('df.csv')
+
+
+# recreate df dataframe by reading csv; ran into a "ufunc 'isfinite' not supported for the inpput types" error
+df = pd.read_csv('df.csv')
+
+# Data list for plotly; for loop to create a trace for each year
+data = []
+for year in years:   
+    year_df = df[np.isfinite(df[year])] # removes any parks with null values to prevent plotly error
+    text = year_df['Park'] + '<br>Annual Visitors: '+ year_df[year].astype(str)
+    scale = 3000
+    trace = {
+        "lat": year_df['Latitude'],
+        "lon": year_df['Longitude'],
+        "marker": {
+            "line": {
+                "color" : "rgb(40,40,40)",
+                "width": 0.5
+            },
+            "size": year_df[year]/scale,
+            "sizemode": "area",
+            "color": year_df['colors']
+        },
+        "text": text,
+        "type": "scattergeo" 
+    }
+    data.append(trace)
+    
+# create steps for sliders in layout
+steps_dict= {}
+
+for i in range(len(years)):
+    args = []
+    for x in range(len(years)):
+        args.insert(i, False)
+    args.remove(False)
+    args.insert(i,True)
+    one_list = ["visible", args]
+    step = {"args": one_list, "label": years[i]}
+    year = years[i]
+    steps_dict[year] = step
+
+steps = list(steps_dict.values())
+
+# set layout for Bubble Maps
+layout = {
+    "geo": {
+        "countrycolor": "rgb(255, 255, 255)",
+        "subunitcolor": "rgb(255,255,255)",
+        "subunitwidth": 1,
+        "countrywidth": 1,
+        "showland": True,
+        "landcolor" : "rgb(217, 217, 217)",
+        "scope" : "usa",
+        "projection": {"type": "albers usa"}
+        
+    },
+    "sliders": [
+    {
+        "active": 0,
+        "steps": steps
+    }
+    ],
+    "title": "National Park Service Visitors since 1980",
+    "showlegend": False
+}
+
+# create Figure for Plotly Bubble Maps
+Figure = {'data': data,
+          'layout': {}
+         
+         }
+
+#Figure['data'] = 
+
+Figure['layout'] = layout
+
+#fig = Figure(data=data, layout=layout)
+pyo.plot(Figure)
+```
 
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
