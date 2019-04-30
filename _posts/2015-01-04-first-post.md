@@ -25,7 +25,7 @@ We'll be using the 'Recreation Visits' as our measure. According to the NPS data
     
 A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting below.
 
-'''
+'code(
 import random
 import pandas as pd
 import numpy as np
@@ -41,7 +41,7 @@ for i in range(1980, 2018, 5):
 
 years.append(str(2018))
 years
-'''
+)'
 
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
