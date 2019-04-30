@@ -13,18 +13,35 @@ This post is an introductory exercise for users who have lived in spreadsheets b
 
 What you'll need: Python 3 and Jupyter Notebooks installed
 
-##Inquiry
+## Inquiry
 I've heard news outlets repeat about a large increase in visitors to national parks over the last few years. I'm curious to see if this is the case for all the parks or just the largest ones.
 
-##Data Collection
+## Data Collection
 The data will be pulled from the National Park Service ("NPS"). NPS provides visitor use statistics via their IRMA Portal.
 
 We'll be using the 'Recreation Visits' as our measure. According to the NPS data dictionary, a Recreation Visit is defined as follows:
-    RECREATION VISIT - The entry of a person onto lands or waters administered by the NPS except as defined above for non-reportable and non-recreation visits.
+
+* RECREATION VISIT - The entry of a person onto lands or waters administered by the NPS except as defined above for non-reportable and non-recreation visits. *
     
 A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting below.
 
+'''
+import random
+import pandas as pd
+import numpy as np
 
+import plotly.offline as pyo
+import plotly.graph_objs as go
+
+
+# list with string values of years we want to analyze
+years = []
+for i in range(1980, 2018, 5):
+    years.append(str(i))
+
+years.append(str(2018))
+years
+'''
 
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
