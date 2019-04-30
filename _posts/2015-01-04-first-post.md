@@ -25,7 +25,7 @@ We'll be using the 'Recreation Visits' as our measure. According to the NPS data
     
 A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting below.
 
-'code(
+```python
 import random
 import pandas as pd
 import numpy as np
@@ -41,7 +41,28 @@ for i in range(1980, 2018, 5):
 
 years.append(str(2018))
 years
-)'
+```
+
+Test test test
+
+```python
+#create dictionary and then perform a for loop to create pandas dataframes in years subfolder
+d = {}
+for year in years:
+    d[year]= pd.read_csv('year/'+ year +'.csv', skiprows=2, index_col=None, usecols=['ParkName', 'Value'])
+    d[year].rename(columns={'Value': year}, inplace=True)
+
+#create one dataframe where each year of visitor statistics is a column
+combined = d['2018']
+for year in years:
+    combined[year] = d[year][year]
+    
+# remove commas from visitor statistics
+for year in years:
+    combined[year] = combined[year].str.replace(',', '')
+```
+
+lorem ipsum
 
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
