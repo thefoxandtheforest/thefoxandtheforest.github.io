@@ -139,7 +139,7 @@ Now we can create our plotly bubble map! A plotly data visualization will need a
 
 Note that data is a list object in Python. Each element in the data list is called a trace (by convention in Plotly documentation). 
 
-* "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface." *
+* "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface." 
 
 We will create a trace for each year. The bubble size will be in proportion to the park's number of visitors. If you would like to adjust the size of the bubbles then you can modify the scale local variable.
 
