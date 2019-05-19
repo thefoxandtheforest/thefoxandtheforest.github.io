@@ -1,5 +1,5 @@
 ---
-title: Exploring Our National Parks with Pandas
+title: Exploring Our National Parks with Pandas and Plotly
 date: 2019-05-18
 permalink: /posts/2019/18/nps-bubble-map/
 tags:
@@ -42,6 +42,8 @@ import plotly.graph_objs as go
 ```
 
 The NPS portal goes back to 1979. We'll be looking at data every five years starting in 1980 and will then add in the most recent year's data, 2018.
+
+The script is flexible to changing year parameters. Just update the years list global variable if you want to change the years evaluated (assuming you have the years' data saved already).
 
 ```python
 # list with string values of years we want to analyze
@@ -240,7 +242,7 @@ pyo.plot(Figure)
 
 ### Analysis
 
-My initial thoughts:
+These are the things that struck me when reviewing:
 
 _Why does North Cascades National Park receive far fewer visitors than either Olympic National Park or Mount Rainier?_
 
@@ -251,22 +253,24 @@ Apparently I wasn't the only one curious...came across this [stack overflow ques
 
 _What accounts for the disparity between park sizes in Alaska?_
 
-I'm personally curious about Alaskan National Parks since I'm going heading up there myself next month. My intuition is that the southern parks receive more visitors due to geographic position along the coast. The invading armada of cruise ships allow visitors to see sites like Glacier Bay without abadoning too much in the way of comfort. Cruises even market land excursions to Denali.
+I'm curious about Alaskan National Parks since going to head up there myself next month. My intuition is that the southern parks receive more visitors due to geographic position along the coast. The invading armada of cruise ships allow visitors to see sites like Glacier Bay without abadoning too much in the way of comfort. Cruises even market land excursions to Denali.
 
-A [tourism research report](https://www.commerce.alaska.gov/web/Portals/6/pub/TourismResearch/AVSP/2016/3.%20AVSP%207%20Visitor%20Volume.pdf?ver=2017-06-06-133939-203) indicates that between 2011-2016 the most popular means of transportation during the summer time was by cruise ship, as expected. However, air has been seeing the most relative gain in terms of % change year over year. A fun analysis in the future could be to see visitor migratory patterns and forecast shape of patterns moving forward. My initial hunch is that cruise ship transportation will taper off sooner than air or highway.
+A [tourism research report](https://www.commerce.alaska.gov/web/Portals/6/pub/TourismResearch/AVSP/2016/3.%20AVSP%207%20Visitor%20Volume.pdf?ver=2017-06-06-133939-203) indicates that between 2011-2016 the most popular means of transportation during the summer time was by cruise ship, as expected. However, air travel has been seeing the most relative gain in terms of % change year over year. A fun analysis in the future to do could be to see tourism transportation patterns and forecast patterns moving forward. My initial hunch is that cruise ship transportation will taper off sooner than air or highway.
 
 If you don't want to be bothered by other park goers then it appears that Gates of the Arctic and Kobuk Valley are your best bets.
 
-_Pseudo Peter Principle- Are the popular getting more popular?_
+_Pseudo Matthew Effect- Are the popular getting more popular?_
 
-It does look like most of the parks' numbers of visitors have increased over the years. 
+It does look like most of the parks' numbers of visitors have increased over the years. It especially seems to be the case for the larger parks (or is this a faulty perception of the visualization?). 
 
-It especially seems to be the case for the larger parks. Further analysis could be done to see if there is a quaisi-Peter Principle at play. Do the popular parks just become more popular relative to others over time?
+Further analysis could be done to see if there is a quaisi Matthew Effect at play. Do the popular parks become more popular relative to others over time?
 
 
 ### /End
 
-That concludes our exploration for today. Hope this has been helpful or at least a bit entertaining. 
+This was only an exploratory analysis so we're not going to conclude with rejecting or not a hypothesis. The intuition that parks are getting more crowded isn't contradicted given the above exploratory data analysis. However, "crowded" is a vauge evaluation criteria. By addding in some type of capacity measure ratio, we can performa a more rigorous, objective analayis of how parks are coping with an uptick in visitors.
+
+That concludes our exploration for today. Hope this has been helpful or at least a bit entertaining.  
 
 If you have any suggestions on ways to improve or to extend the analysis, then please don't hesitate to reach out. Cheers!
 
