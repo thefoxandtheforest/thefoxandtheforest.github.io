@@ -5,11 +5,10 @@ permalink: /posts/2019/04/plotly-bubble/
 tags:
   - Python
   - plotly
-  - Markdown
-  - Sphinx
+  - National Parks
 ---
 
-This post is an introductory exercise for users who have lived in spreadsheets but are wanting to expand their horizons to see what the powerful pandas library within the python ecosystem can provide.
+This post is an introductory exercise for users who have lived in spreadsheets but are wanting to expand their horizons to see what the powerful pandas and plotly libraries can provide within the python ecosystem.
 
 What you'll need: Python 3 and Jupyter Notebooks installed
 
@@ -25,6 +24,9 @@ We'll be using the 'Recreation Visits' as our measure. According to the NPS data
     
 A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting below.
 
+
+First we'll import the previously mentioned libraries, pandas and plotly, along with random and numpy.
+
 ```python
 import random
 import pandas as pd
@@ -32,8 +34,11 @@ import numpy as np
 
 import plotly.offline as pyo
 import plotly.graph_objs as go
+```
 
+The NPS portal goes back to 1979. We'll be looking at data every five years starting in 1980 and will then add in th emost recent year data, 2018.
 
+```python
 # list with string values of years we want to analyze
 years = []
 for i in range(1980, 2018, 5):
@@ -41,7 +46,10 @@ for i in range(1980, 2018, 5):
 
 years.append(str(2018))
 years
+```
+I've already saved the data to a 'year' folder. You can find that here on my Github. We'll create a dictionary to then house a pandas dataframe for each year's data.
 
+```python
 #create dictionary and then perform a for loop to create pandas dataframes in years subfolder
 d = {}
 for year in years:
@@ -56,12 +64,19 @@ for year in years:
 # remove commas from visitor statistics
 for year in years:
     combined[year] = combined[year].str.replace(',', '')
+```
 
+Since we're going to create a bubble map, we'll need to get latitude and longitude. A table on the List of National Parks wikipedia page provides this for us. I've already scraped the data, which you can find here.
+
+```python
 # create pandas dataframe from wikipedia data with latitude and longitude
 
 wiki_df = pd.read_csv('wiki_data.csv', usecols=range(3)) # we only need first three columns
+```
 
+Some minor revisions need to be made to the park names to merge the two dataframes. Indiana Dunes National Park was designated a National Park in 2019 so it is being removed from this report.
 
+```python
 # create list from combined.ParkName and do some modification to ensure dataframes are equivalent lengths
 np_list = list(combined['ParkName'].unique())
 
@@ -75,13 +90,25 @@ np_list.sort()
 
 # create new column value with np_list
 wiki_df['ParkName'] = np_list
+```
 
+Pandas makes it simple to merge the two dataframes.
+
+```python
 # merge the two dataframes
 df = combined.merge(wiki_df, on='ParkName')
+```
 
+On a first pass, I couldn't get the buble map to show any bubbles. I eventually found out that the Wikipedia article's Longitude was based on degrees West. In the plotly documentation, the map is based on degrees East. 
+
+```python
 # In order to make the Longitude value degree East instead of West; Plotly reads longitude as East
 df['Longitude'] = df['Longitude'] * -1
+```
 
+We'll give each Park a color designation to make it easier to distinguish each in the bubble map.
+
+```python
 # give each Park its own color/rgb value
 colors = []
 
@@ -89,8 +116,11 @@ for i in range(len(df.ParkName)):
     colors.append(f'rgb({np.random.randint(0,256)}, {np.random.randint(0,256)}, {np.random.randint(0,256)})')
 
 df['colors'] = colors
+```
 
+I ran into the "ufunc 'isfinite' not supported for the inpput types" error. I found plenty of stackoverflow and resolved github issues dealin with this error but couldn't find a way to resolve it. My inelegant but expedient solution was just to save the df as a csv and then use the read_csv pandas function again.
 
+```python
 #save df as csv
 
 df.to_csv('df.csv')
@@ -98,7 +128,14 @@ df.to_csv('df.csv')
 
 # recreate df dataframe by reading csv; ran into a "ufunc 'isfinite' not supported for the inpput types" error
 df = pd.read_csv('df.csv')
+```
 
+Now we can create our plotly bubble map! A plotly data visualization will need a Data, Layout, and Figure.
+
+Note that data is a list object in Python. Each element in the data list is called a trace by convention in plotly. As per the plotly documentation, "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface."
+
+
+```python
 # Data list for plotly; for loop to create a trace for each year
 data = []
 for year in years:   
@@ -121,7 +158,10 @@ for year in years:
         "type": "scattergeo" 
     }
     data.append(trace)
-    
+ ```
+ Next we will create a layout. We will create a slider bar with values for each year examined. This is where we also give our visualization and title and indicate that our geographic layout will be limited to the scope of the USA.
+ 
+ ```python
 # create steps for sliders in layout
 steps_dict= {}
 
@@ -160,7 +200,11 @@ layout = {
     "title": "National Park Service Visitors since 1980",
     "showlegend": False
 }
+```
 
+Finally we set our Figure and get to plotting!
+
+```python
 # create Figure for Plotly Bubble Maps
 Figure = {'data': data,
           'layout': {}
