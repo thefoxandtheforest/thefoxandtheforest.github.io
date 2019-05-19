@@ -13,19 +13,29 @@ This post is an introductory exercise for users who have lived in spreadsheets b
 What you'll need: Python 3 and Jupyter Notebooks installed
 
 ### Inquiry
-I've heard news outlets repeat about a large increase in visitors to national parks over the last few years. I'm curious to see if this is the case for all the parks or just the largest ones.
+A theme that I hear often on the news and in passing is that our national parks are getting overcrowded. I'm curious to see how that intuition measures up to the available stistics. 
+
+### Deliverable
+
+The deliverable for my analysis is going to be a data visualization, but which one? I consulted the [Data Viz Project](https://datavizproject.com/) to determine what visualization to use as the deliverable for this analysis. 
+
+After some perusing, I decided on a [Bubble Map](https://datavizproject.com/data-type/bubble-map-chart/#). As noted by DVP, "A Bubble Map Chart is simply a combination of a bubble chart data visualization and a map. It is used to visualize location and proportion in a simple way." 
+
+This will be helpful for visualizing where national parks are located and their size (number of visitors) relative to each other in a specific year, but it alone won't get at the question of how parks' visitation stats have changed over time. To do so, a slider component will be added to see stats over a designated time period. 
 
 ### National Park Service IRMA Portal
-The data will be pulled from the National Park Service ("NPS"). NPS provides visitor use statistics via their IRMA Portal.
+The data will be pulled from the National Park Service ("NPS"). NPS provides visitor use statistics via their [IRMA Portal](https://irma.nps.gov/Stats/Reports/National).
 
 We'll be using the 'Recreation Visits' as our measure. According to the NPS data dictionary, a Recreation Visit is defined as follows:
 
 * RECREATION VISIT - The entry of a person onto lands or waters administered by the NPS except as defined above for non-reportable and non-recreation visits. *
     
-A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting below.
+A tutorial in web scraping will be presented in a future post, but for the time being you can either download the data from the portal directly or head over to my Github profile for the years we'll be reporting on below.
 
+### Notebook Walkthrough
+This analysis will be done using Python and Jupyter Notebooks. 
 
-First we'll import the previously mentioned libraries, pandas and plotly, along with random and numpy.
+First, we'll import the libraries needed for our analysis. The data prep will be done mainly using pandas and numpy. The visualization will be done using the open source graphing library Plotly. Plotly's Python library supports [Bubble Maps](https://plot.ly/python/bubble-maps/) and [Sliders](https://plot.ly/python/sliders/).
 
 ```python
 import random
@@ -36,7 +46,7 @@ import plotly.offline as pyo
 import plotly.graph_objs as go
 ```
 
-The NPS portal goes back to 1979. We'll be looking at data every five years starting in 1980 and will then add in th emost recent year data, 2018.
+The NPS portal goes back to 1979. We'll be looking at data every five years starting in 1980 and will then add in the most recent year's data, 2018.
 
 ```python
 # list with string values of years we want to analyze
@@ -74,7 +84,7 @@ Since we're going to create a bubble map, we'll need to get latitude and longitu
 wiki_df = pd.read_csv('wiki_data.csv', usecols=range(3)) # we only need first three columns
 ```
 
-Some minor revisions need to be made to the park names to merge the two dataframes. Indiana Dunes National Park was designated a National Park in 2019 so it is being removed from this report.
+Some minor revisions need to be made to the park names to merge the two dataframes. Indiana Dunes National Park was designated a National Park in 2019, so it is being removed from this report.
 
 ```python
 # create list from combined.ParkName and do some modification to ensure dataframes are equivalent lengths
@@ -92,14 +102,14 @@ np_list.sort()
 wiki_df['ParkName'] = np_list
 ```
 
-Pandas makes it simple to merge the two dataframes.
+Pandas makes it simple to merge the two dataframes. This is similar to a JOIN in SQL. The default is an inner join, which serves our purpose. If you would like to perform a LEFT/RIGHT/OUTER JOIN then you can do so by passing an argument, i.e. how='outer'.
 
 ```python
 # merge the two dataframes
 df = combined.merge(wiki_df, on='ParkName')
 ```
 
-On a first pass, I couldn't get the buble map to show any bubbles. I eventually found out that the Wikipedia article's Longitude was based on degrees West. In the plotly documentation, the map is based on degrees East. 
+On a first pass, I couldn't get the bubble map to show any bubbles. I eventually found out that the Wikipedia article's Longitude was based on degrees West. After reviewing the Plotly documentation, I diagnosed that the issue was that the map takes Longitude based on degrees east. However, the wikipedia table had the Longitude listed degrees west. It is a simple fix by taking the negative value. 
 
 ```python
 # In order to make the Longitude value degree East instead of West; Plotly reads longitude as East
@@ -118,7 +128,7 @@ for i in range(len(df.ParkName)):
 df['colors'] = colors
 ```
 
-I ran into the "ufunc 'isfinite' not supported for the inpput types" error. I found plenty of stackoverflow and resolved github issues dealin with this error but couldn't find a way to resolve it. My inelegant but expedient solution was just to save the df as a csv and then use the read_csv pandas function again.
+I ran into the "ufunc 'isfinite' not supported for the inpput types" error. I found plenty of stackoverflow and resolved github issues dealin with this error but couldn't find a way to resolve it in my ca. My inelegant but expedient solution is just to save the df as a csv and then use the read_csv pandas function again.
 
 ```python
 #save df as csv
@@ -132,11 +142,11 @@ df = pd.read_csv('df.csv')
 
 Now we can create our plotly bubble map! A plotly data visualization will need a Data, Layout, and Figure.
 
-Note that data is a list object in Python. Each element in the data list is called a trace by convention in plotly. 
+Note that data is a list object in Python. Each element in the data list is called a trace (by convention in Plotly documentation). 
 
-As per the plotly documentation, "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface."
+* "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface." *
 
-If you would like to adjust the size of the bubbles then you can modify the scale variable.
+We will create a trace for each year. The bubble size will be in proportion to the park's number of visitors. If you would like to adjust the size of the bubbles then you can modify the scale local variable.
 
 ```python
 # Data list for plotly; for loop to create a trace for each year
@@ -162,7 +172,7 @@ for year in years:
     }
     data.append(trace)
  ```
- Next we will create a layout. We will create a slider bar with values for each year examined. This is where we also give our visualization and title and indicate that our geographic layout will be limited to the scope of the USA.
+ Next we will create the Layout. The slider bar needs to be created along with the arguement to show only the trace for the year picked. The Layout is where we also give our visualization a title and indicate that our geographic layout will be limited to the scope of the USA. Note that this geographic scope is partly what presented an issue with troubleshooting the Longitude issue before. If the scope would have been set to global then it would have been easier to resolve the issue because I'd have seen that all of the parks would have been located somewhere in western China or Mongolia!
  
  ```python
 # create steps for sliders in layout
