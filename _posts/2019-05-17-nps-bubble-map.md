@@ -242,30 +242,33 @@ pyo.plot(Figure)
 
 My initial thoughts:
 
-1. Why does North Cascades National Park receive far fewer visitors than either Olympic National Park or Mount Rainier?
+_Why does North Cascades National Park receive far fewer visitors than either Olympic National Park or Mount Rainier?_
 
 I find it odd that North Cascades National Park in Washington state would receive such far fewer visitors than either Olympic National Park or Mount Rainier. According to Google Maps, it is a two hour drive on the weekend to the park. Well, it has to do with the administrative boundaries. It's difficult to drive into the park so requires some hiking to get into the actual Park. NPS treats it along with Ross Lake National Recreation Area, and the Lake Chelan National Recreation Area as one complex to manage ([source](https://journey2allnationalparks.com/parks/north-cascades-national-park-few-official-visitors/). If we expand the boundaries to incorporate that, then [nearly 1 million visitors stopped by](https://www.seattletimes.com/life/travel/nearly-1-million-visitors-stopped-by-north-cascades-park-complex-in-2016/). 
 
 Apparently I wasn't the only one curious...came across this [stack overflow question](https://outdoors.stackexchange.com/questions/19567/why-does-north-cascades-national-park-get-so-few-visitors) when googling.
 
 
-2. What accounts for the disparity between park sizes in Alaska?
+_What accounts for the disparity between park sizes in Alaska?_
 
 I'm personally curious about Alaskan National Parks since I'm going heading up there myself next month. My intuition is that the southern parks receive more visitors due to geographic position along the coast. The invading armada of cruise ships allow visitors to see sites like Glacier Bay without abadoning too much in the way of comfort. Cruises even market land excursions to Denali.
 
-A tourism research report shows that between 2011-2016 the most popular means of transportation during the summer time was by cruise ship, as expected. However, air has been seeing the most relative gain in terms of % change. A fun analysis in the future could be to see visitor migratory patterns and forecast shape of patterns moving forward. My initial hunch is that cruise ship transportation will taper off sooner than air or highway.
+A [tourism research report](https://www.commerce.alaska.gov/web/Portals/6/pub/TourismResearch/AVSP/2016/3.%20AVSP%207%20Visitor%20Volume.pdf?ver=2017-06-06-133939-203) indicates that between 2011-2016 the most popular means of transportation during the summer time was by cruise ship, as expected. However, air has been seeing the most relative gain in terms of % change year over year. A fun analysis in the future could be to see visitor migratory patterns and forecast shape of patterns moving forward. My initial hunch is that cruise ship transportation will taper off sooner than air or highway.
 
 If you don't want to be bothered by other park goers then it appears that Gates of the Arctic and Kobuk Valley are your best bets.
 
+_Pseudo Peter Principle- Are the popular getting more popular?_
+
+It does look like most of the parks' numbers of visitors have increased over the years. 
+
+It especially seems to be the case for the larger parks. Further analysis could be done to see if there is a quaisi-Peter Principle at play. Do the popular parks just become more popular relative to others over time?
 
 
-3. Pseudo Peter Principle- Are the popular getting more popular?
+### /End
 
-It does look like most of the parks' numbers of visitors have increased over the years. It especially seems to be the case for the larger parks. Further analysis could be done to see if there is a quaisi-Peter Principle at play. Do the popular parks just become more popular relative to others over time?
+That concludes our exploration for today. Hope this has been helpful or at least a bit entertaining. 
 
-
-
-
+If you have any suggestions on ways to improve or to extend the analysis, then please don't hesitate to reach out. Cheers!
 
 
 
