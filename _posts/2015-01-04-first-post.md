@@ -12,10 +12,10 @@ This post is an introductory exercise for users who have lived in spreadsheets b
 
 What you'll need: Python 3 and Jupyter Notebooks installed
 
-## Inquiry
+### Inquiry
 I've heard news outlets repeat about a large increase in visitors to national parks over the last few years. I'm curious to see if this is the case for all the parks or just the largest ones.
 
-## Data Collection
+### National Park Service IRMA Portal
 The data will be pulled from the National Park Service ("NPS"). NPS provides visitor use statistics via their IRMA Portal.
 
 We'll be using the 'Recreation Visits' as our measure. According to the NPS data dictionary, a Recreation Visit is defined as follows:
@@ -132,8 +132,11 @@ df = pd.read_csv('df.csv')
 
 Now we can create our plotly bubble map! A plotly data visualization will need a Data, Layout, and Figure.
 
-Note that data is a list object in Python. Each element in the data list is called a trace by convention in plotly. As per the plotly documentation, "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface."
+Note that data is a list object in Python. Each element in the data list is called a trace by convention in plotly. 
 
+As per the plotly documentation, "trace is just the name we give a collection of data and the specifications of which we want that data plotted. Notice that a trace will also be an object itself, and these will be named according to how you want the data displayed on the plotting surface."
+
+If you would like to adjust the size of the bubbles then you can modify the scale variable.
 
 ```python
 # Data list for plotly; for loop to create a trace for each year
